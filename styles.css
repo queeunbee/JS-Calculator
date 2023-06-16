@@ -1,0 +1,13 @@
+  /* select all of our elements including our before and after elements */
+
+  *, *::before, *::after {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+  }
+
+  body {
+      padding: 0;
+      margin: 0;
+      background: linear-gradient(to right, #00AAFF, #00FF6C)
+  }
