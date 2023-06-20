@@ -12,14 +12,19 @@ class Calculator {
     }
 
     delete() {
-
+        this.currentOperand = this.currentOperand.slice(0, this.currentOperand.length-1)
     }
 
     appendNumber(number) {
-
+        if (number === '.' && this.currentOperand.includes('.')) {
+            return;
+        }
+        this.currentOperand += number;
     }
 
     chooseOperation(operation) {
+        this.operation = operation;
+        console.log('this is the current operation' + this.operation);
 
     }
 
@@ -28,11 +33,12 @@ class Calculator {
     }
 
     updateDisplay() {
-
+        this.currentOperandTextElement.innerText = this.currentOperand;
+        if (this.operation) {
+            this.currentOperandTextElement.innerText = this.currentOperand + ' ' + this.operation
+        }
     }
 }
-
-
 
 
 
@@ -49,6 +55,24 @@ const calculator = new Calculator(previousOperandTextElement, currentOperandText
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
-        calculator.appendNumber(button.innerTExt)
+        calculator.appendNumber(button.innerText)
+        calculator.updateDisplay()
     })
 })
+
+operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calculator.chooseOperation(button.innerText)
+        calculator.updateDisplay()
+    })
+})
+
+allClearButton.addEventListener('click', () => {
+    calculator.clear()
+    calculator.updateDisplay()
+})
+
+deleteButton.addEventListener('click', () => {
+    calculator.delete();
+    calculator.updateDisplay();
+}) 
